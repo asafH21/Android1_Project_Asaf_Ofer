@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_new"
+    android:scaleType="centerCrop"
+    tools:context=".activity.MainActivity">
+
+    <TextView
+        android:id="@+id/stockName"
+        android:layout_width="178dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="36dp"
+        android:gravity="center"
+        android:text="AO Stocks"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <AutoCompleteTextView
+        android:id="@+id/editStockName"
+        android:layout_width="359dp"
+        android:layout_height="41dp"
+        android:layout_below="@id/stockName"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:completionThreshold="3"
+        android:ems="10"
+        android:hint="ex: TSLA"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white" />
+
+    <TextView
+        android:id="@+id/histDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editStockName"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/hist_date"
+        android:textColor="@color/white"
+        android:textSize="16dp" />
+
+    <EditText
+        android:id="@+id/editTextDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/histDate"
+        android:layout_marginStart="16dp"
+        android:ems="10"
+        android:hint="ex: 1992-03-21 (Optional)"
+        android:inputType="date"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white" />
+
+    <Button
+        android:id="@+id/quoteBtn"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextDate"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="200dp"
+        android:layout_marginTop="31dp"
+        android:layout_marginEnd="-190dp"
+        android:layout_toLeftOf="@+id/clearBtn"
+        android:background="@drawable/dessignbutton"
+        android:fontFamily="@font/avener"
+        android:text="Search"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold" />
+
+
+    <androidx.cardview.widget.CardView
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/clearBtn"
+        android:layout_margin="10dp"
+        android:elevation="8dp"
+
+        app:cardCornerRadius="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#F1F1F1"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/favorites"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/favorites"
+                android:textColor="@color/teal_700"
+                android:textSize="16dp" />
+
+
+            <TextView
+                android:id="@+id/textPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="120dp"
+                android:layout_marginTop="16dp"
+                android:text="Price"
+                android:textColor="@color/purple_200"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/textChangePer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="190dp"
+                android:layout_marginTop="16dp"
+                android:text="Change"
+                android:textColor="@color/purple_200"
+                android:textSize="16dp" />
+
+            <ImageView
+                android:id="@+id/refreshBtn"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/refresh_icon" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/favRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/refreshBtn"
+                android:layout_marginTop="10dp" />
+
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerInParent="true"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+    <Button
+        android:id="@+id/clearBtn"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextDate"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="220dp"
+        android:layout_marginTop="31dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/dessignbutton"
+        android:fontFamily="@font/avener"
+        android:text="@string/clear"
+        android:textColor="#FFFFFF" />
+
+
+</RelativeLayout>

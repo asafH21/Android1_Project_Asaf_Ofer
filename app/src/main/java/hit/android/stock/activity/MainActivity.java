@@ -15,11 +15,12 @@ import hit.android.stock.utlitiy.AutoCompleteListenerTextChanged;
 import hit.android.stock.utlitiy.DateUtility;
 
 public class MainActivity extends AppCompatActivity implements AutoCompleteListenerTextChanged.ResultListener {
-
     private AutoCompleteTextView autoTextView;
     private TextView histDate;
     private final AutoCompleteListenerTextChanged autoCompleteListener = new AutoCompleteListenerTextChanged();
 
+
+    //on create function - takes on the the screen activity_main
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements AutoCompleteListe
         }
     }
 
+    //When the user chose a stock name and press it - Stop suggestions dropdown menu
     private void initAutoCompleteStockMarket() {
         autoTextView = findViewById(R.id.editStockName);
         autoCompleteListener.setListener(this);
@@ -61,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements AutoCompleteListe
         });
     }
 
+    //Invokes when the user press the clear button - fill both fields with an empty string
     private void initViews() {
         histDate = findViewById(R.id.editTextDate);
         findViewById(R.id.quoteBtn).setOnClickListener(v -> performSearchStock());

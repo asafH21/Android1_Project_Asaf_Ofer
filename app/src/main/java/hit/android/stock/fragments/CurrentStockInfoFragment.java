@@ -83,11 +83,9 @@ public class CurrentStockInfoFragment extends Fragment {
 
     // Inner class for querying JSON in background thread.
     private class JsonTask extends AsyncTask<String, Long, Pair[]> {
-
         protected void onPreExecute() {
             super.onPreExecute();
         }
-
         protected Pair[] doInBackground(String... params) {
             String jsonStr = null;
             try {

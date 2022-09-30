@@ -17,6 +17,7 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(this::moveToMainActivity, 1500);
     }
 
+    //Move from splash screen to main activity screen using intent
     private void moveToMainActivity() {
         Intent i = new Intent(SplashActivity.this, MainActivity.class);
         startActivity(i);

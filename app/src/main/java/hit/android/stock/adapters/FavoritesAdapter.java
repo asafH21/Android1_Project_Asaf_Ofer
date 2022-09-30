@@ -17,22 +17,21 @@ import hit.android.stock.R;
 import hit.android.stock.models.FavoriteModel;
 
 public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.ViewHolder> {
-
     private final List<FavoriteModel> list = new ArrayList<>();
-
     private DeleteListener listener;
-
 
     public FavoritesAdapter(DeleteListener listener) {
         this.listener = listener;
     }
 
+    //Delete the list, add back all the new list, notify UI
     public void addList(List<FavoriteModel> newList) {
         list.clear();
         list.addAll(newList);
         notifyDataSetChanged();
     }
 
+    //Delete the list
     public void clearList() {
         list.clear();
         notifyDataSetChanged();
@@ -47,6 +46,9 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
         public View layout;
         public ImageView deleteFav;
 
+
+        //The layout of single stock in Favorites recycler
+        //Also here we "connect" between components (ex: ImageView to deleteFav)
         public ViewHolder(View v) {
             super(v);
             layout = v;
@@ -69,20 +71,27 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
     }
 
     // Replace the contents of a view. (invoked by the layout manager)
+    //Takes the values received and put them in their correct place (stock name, price, percentage)
     public void onBindViewHolder(ViewHolder holder, final int position) {
         FavoriteModel favoriteModel = list.get(position);
         holder.stockName.setText(favoriteModel.getName());
         holder.stockPrice.setText(favoriteModel.getLastValue());
-        String precentate = favoriteModel.getPrecentage();
-        holder.stockChange.setText(getShortPrice(precentate));
+        String percentage = favoriteModel.getPrecentage();
+        holder.stockChange.setText(getShortPrice(percentage));
+        //Choose the colors that will show percentage of change (green/red)
         holder.stockChange.setTextColor(favoriteModel.getPrecentage().contains("+") ? Color.GREEN : Color.RED);
+        //Trash can operation
         holder.deleteFav.setOnClickListener(view -> {
             list.remove(holder.getAdapterPosition());
             notifyDataSetChanged();
             listener.onFavRequestedDelete(favoriteModel.getName());
         });
     }
+    public interface DeleteListener {
+        public void onFavRequestedDelete(String stock);
+    }
 
+    //Show only 5 digits of the change of a stock
     private String getShortPrice(String orignal) {
         try {
             String result = orignal.substring(0, 5);
@@ -93,14 +102,12 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
         return orignal;
     }
 
-    // Return the size of your data set. (invoked by the layout manager)
+    // Return the size of the stocks favorites list
     @Override
     public int getItemCount() {
         return list.size();
     }
 
 
-    public interface DeleteListener {
-        public void onFavRequestedDelete(String stock);
-    }
+
 }

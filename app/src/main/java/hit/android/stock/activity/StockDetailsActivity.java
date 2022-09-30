@@ -35,6 +35,9 @@ public class StockDetailsActivity extends AppCompatActivity {
         fab = findViewById(R.id.fab);
         loadDetailsFragment();
 
+        //When we are in stock fragment and the user press on the fab button
+        //this will check if the stock key and value are already in the shared preferences list
+        //if its not - it will ad it, and if it does - it will delete it
         fab.setOnClickListener(view -> {
             SharedPreferencesJSON favJson = new SharedPreferencesJSON(context);
             JSONObject favJsonObj = favJson.getSharedPreferencesJSON();
@@ -50,6 +53,8 @@ public class StockDetailsActivity extends AppCompatActivity {
         });
     }
 
+    //This loads the stock details fragment and then makes a server call for a new instance
+    //in order to receive the wanted stock from the stocks API
     private void loadDetailsFragment() {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.container, CurrentStockInfoFragment.newInstance(stockName), null);

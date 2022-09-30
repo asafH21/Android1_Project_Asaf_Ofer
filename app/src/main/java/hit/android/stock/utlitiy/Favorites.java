@@ -70,16 +70,20 @@ public class Favorites implements FavoritesAdapter.DeleteListener {
         return (curr - prev) / prev * 100;
     }
 
+
+    //Delete the stock from shared preferences and print message
     @Override
     public void onFavRequestedDelete(String stock) {
         favJSON.removeFromSharedPreferencesJSON(stock);
         Toast.makeText(context, stock + " has been removed from favorites.", Toast.LENGTH_SHORT).show();
     }
 
-    // Inner class for querying JSON in background thread.
+    //Inner class for querying JSON in background thread.
+    //Brings back the list of stocks in shared preferences
     private class CacheStockExecuteForDataTask extends AsyncTask<Void, Long, Void> {
         private final List<FavoriteModel> list = new ArrayList<>();
 
+        //Make progress bar visible
         protected void onPreExecute() {
             super.onPreExecute();
             progressBar.setVisibility(View.VISIBLE);

@@ -31,7 +31,6 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<StockDetailsAdapte
     }
 
 
-    // This sets each data item's view in accordance with row_layout.xml.
     @Override
     public StockDetailsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewTop) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
@@ -40,13 +39,11 @@ public class StockDetailsAdapter extends RecyclerView.Adapter<StockDetailsAdapte
         return vh;
     }
 
-    // Replace the contents of a view. (invoked by the layout manager)
     public void onBindViewHolder(ViewHolder holder, final int position) {
         Pair pair = values.get(position);
         holder.textContent.setText(String.format("%S - %s", (String) pair.first, (String) pair.second));
     }
 
-    // Return the size of your data set. (invoked by the layout manager)
     @Override
     public int getItemCount() {
         return values.size();

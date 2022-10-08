@@ -18,10 +18,7 @@ import hit.android.stock.db.SharedPreferencesJSON;
 public class StockDetailsActivity extends AppCompatActivity {
 
     private Context context;
-
-    // Data variables
     private String stockName;
-    // Layout variables
     private FloatingActionButton fab;
 
     @Override

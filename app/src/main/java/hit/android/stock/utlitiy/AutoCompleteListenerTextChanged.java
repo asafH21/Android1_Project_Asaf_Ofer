@@ -11,12 +11,9 @@ import java.util.Arrays;
 
 public class AutoCompleteListenerTextChanged implements TextWatcher {
 
-    // Data variables
     private String input;
-
     private final ArrayList<String> stocksArrayResults = new ArrayList<>();
     private ResultListener listener;
-
 
     public void setListener(ResultListener listener) {
         this.listener = listener;
@@ -42,7 +39,6 @@ public class AutoCompleteListenerTextChanged implements TextWatcher {
     public void afterTextChanged(Editable s) {
     }
 
-    // Inner class for querying JSON in background thread.
     private class JsonTask extends AsyncTask<String, Void, String[]> {
 
         protected void onPreExecute() {
@@ -51,14 +47,12 @@ public class AutoCompleteListenerTextChanged implements TextWatcher {
 
         protected String[] doInBackground(String... params) {
             String jsonStr = null;
-            // Query from website for json info.
             try {
                 URL url = new URL(params[0]);
                 jsonStr = JSONParser.getJsonFromUrl(url);
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
-            // Parse json info and return it within an array.
             return JSONParser.getValueArray(jsonStr, "ticker");
         }
 

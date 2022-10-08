@@ -25,16 +25,11 @@ import hit.android.stock.adapters.StockDetailsAdapter;
 
 public class CurrentStockInfoFragment extends Fragment {
 
-    // Data variables
     private String stockName;
-
-    // RecyclerView variables
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private List<Pair> pairs = new ArrayList<>();
-
-    // Context variables
     private Context context;
 
     public static CurrentStockInfoFragment newInstance(String stockName) {
@@ -53,26 +48,20 @@ public class CurrentStockInfoFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Get the view.
         View root = inflater.inflate(R.layout.recycler_view_current, container, false);
 
-        // Create the recycler view.
         recyclerView = (RecyclerView) root.findViewById(R.id.currRecyclerView);
         recyclerView.setHasFixedSize(true);
 
-        // LinearLayout manager
         layoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(layoutManager);
 
-        // Grab Tiingo info place it into UI in another thread.
         queryJSON();
 
-        // Return.
         return root;
     }
 
 
-    //Queries Tiingo's  JSON stock database for stock info.
     public void queryJSON() {
         String token = context.getResources().getString(R.string.token);
         Bundle bundle = this.getArguments();
@@ -81,7 +70,6 @@ public class CurrentStockInfoFragment extends Fragment {
         new JsonTask().execute(url);
     }
 
-    // Inner class for querying JSON in background thread.
     private class JsonTask extends AsyncTask<String, Long, Pair[]> {
         protected void onPreExecute() {
             super.onPreExecute();
@@ -94,7 +82,6 @@ public class CurrentStockInfoFragment extends Fragment {
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
-            // Parse json info and return it within an array.
             return JSONParser.getKeyValuePairArray(jsonStr);
         }
 
@@ -107,12 +94,10 @@ public class CurrentStockInfoFragment extends Fragment {
             super.onPostExecute(result);
 
 
-            // Add rows to recycler view based on number of JSON data rows.
             for (int i = 0; i < result.length; i++) {
                 pairs.add(result[i]);
             }
 
-            // Initialize adapter and adapt pairs data to our recyclerView.
             mAdapter = new StockDetailsAdapter(pairs);
             recyclerView.setAdapter(mAdapter);
         }

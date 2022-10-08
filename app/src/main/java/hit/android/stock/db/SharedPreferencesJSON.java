@@ -14,9 +14,7 @@ public class SharedPreferencesJSON {
         this.context = context;
     }
 
-    /**
-     * Add a stock to the JSON string stored in shared preferences.
-     */
+
     public void addToSharedPreferencesJSON(String stockName) {
         SharedPreferences settings = context.getSharedPreferences("STOCK_SEARCH_FAVORITES", context.MODE_PRIVATE);
         SharedPreferences.Editor editor = settings.edit();
@@ -35,9 +33,7 @@ public class SharedPreferencesJSON {
         editor.apply();
     }
 
-    /**
-     * Remove a stock from the JSON string stored in shared preferences.
-     */
+
     public void removeFromSharedPreferencesJSON(String stockName) {
         SharedPreferences settings = context.getSharedPreferences("STOCK_SEARCH_FAVORITES", context.MODE_PRIVATE);
         SharedPreferences.Editor editor = settings.edit();
@@ -57,9 +53,7 @@ public class SharedPreferencesJSON {
         editor.apply();
     }
 
-    /**
-     * Retrieves the JSON string stored in shared preferences.
-     */
+
     public JSONObject getSharedPreferencesJSON() {
         SharedPreferences settings = context.getSharedPreferences("STOCK_SEARCH_FAVORITES", context.MODE_PRIVATE);
         String favJsonStr = settings.getString("favJSON", "{}");

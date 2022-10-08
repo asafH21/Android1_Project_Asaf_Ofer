@@ -27,18 +27,13 @@ import hit.android.stock.models.FavoriteModel;
 
 public class Favorites implements FavoritesAdapter.DeleteListener {
 
-    // Context variables
     private Context context;
     private Activity mainActivity;
     private SharedPreferencesJSON favJSON;
-    // RecyclerView variables
     private RecyclerView recyclerView;
     private FavoritesAdapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private ProgressBar progressBar;
-
-    // Layout variables
-//    private ProgressBar favProgBar;
     private ImageView refreshBtn;
 
 
@@ -83,7 +78,6 @@ public class Favorites implements FavoritesAdapter.DeleteListener {
     private class CacheStockExecuteForDataTask extends AsyncTask<Void, Long, Void> {
         private final List<FavoriteModel> list = new ArrayList<>();
 
-        //Make progress bar visible
         protected void onPreExecute() {
             super.onPreExecute();
             progressBar.setVisibility(View.VISIBLE);
@@ -93,13 +87,11 @@ public class Favorites implements FavoritesAdapter.DeleteListener {
             String token = context.getResources().getString(R.string.token);
             JSONObject jsonObjPref = favJSON.getSharedPreferencesJSON();
 
-            // Iterate through the JSONObject and query every stock name within in Tiingo.
             Iterator<String> keys = jsonObjPref.keys();
             int i = 0;
             while (keys.hasNext()) {
                 String stockName = keys.next();
 
-                // Query Tiingo.
                 JSONObject jsonObj = null;
                 try {
                     URL url = new URL("https://api.tiingo.com/iex/?tickers=" + stockName + "&token=" + token);
@@ -107,7 +99,6 @@ public class Favorites implements FavoritesAdapter.DeleteListener {
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
                 }
-                // Retrieve the json info we need for favorites.
                 try {
                     String prevClosePrice = jsonObj.getString("prevClose");
                     String latestPrice = jsonObj.getString("last");
@@ -117,7 +108,6 @@ public class Favorites implements FavoritesAdapter.DeleteListener {
                         stockChange = "+" + stockChange;
                     }
 
-                    // Add it to the list of favorite stocks as an array.
                     list.add(new FavoriteModel(stockName, latestPrice, stockChange));
                 } catch (JSONException e) {
                     e.printStackTrace();

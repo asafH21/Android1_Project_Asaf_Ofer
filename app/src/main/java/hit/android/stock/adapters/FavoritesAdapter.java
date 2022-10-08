@@ -37,8 +37,6 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
         notifyDataSetChanged();
     }
 
-    // Provides a reference to the views for each provided data item.
-    // ViewHolder will contain all the views of the data items.
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView stockName;
         public TextView stockPrice;
@@ -60,8 +58,6 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
     }
 
 
-    // Inflate your views. (invoked by the layout manager)
-    // This sets each data item's view in accordance with row_layout.xml.
     @Override
     public FavoritesAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewTop) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
@@ -70,7 +66,6 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
         return vh;
     }
 
-    // Replace the contents of a view. (invoked by the layout manager)
     //Takes the values received and put them in their correct place (stock name, price, percentage)
     public void onBindViewHolder(ViewHolder holder, final int position) {
         FavoriteModel favoriteModel = list.get(position);
@@ -102,7 +97,6 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
         return orignal;
     }
 
-    // Return the size of the stocks favorites list
     @Override
     public int getItemCount() {
         return list.size();

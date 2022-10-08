@@ -24,7 +24,6 @@ public class JSONParser {
         JSONObject jsonObj = null;
         JSONArray jsonArr = null;
         Pair[] pairArr = {};
-        // Assure given input is a JSON formatted string.
         try {
             jsonObj = new JSONObject(jsonStr);
         }
@@ -38,7 +37,6 @@ public class JSONParser {
                 eArr.printStackTrace();
             }
         }
-        // Parse the string into an array of key value pairs.
         if (jsonObj != null) {
             try {
                 pairArr = new Pair[jsonObj.length()];
@@ -48,19 +46,16 @@ public class JSONParser {
                     String key = keys.next();
                     String value = jsonObj.getString(key);
 
-                    // Check if market is open. If it is, set timestamp value to be "-" instead of null.
                     if (key.equals("mid")) {
                         LocalDateTime currentTimestamp = LocalDateTime.now();
                         String timestampStr = jsonObj.getString("timestamp");
                         LocalDateTime timestamp = LocalDateTime.parse(timestampStr, DateTimeFormatter.ISO_OFFSET_DATE_TIME);
                         long minutes = ChronoUnit.MINUTES.between(timestamp, currentTimestamp);
-                        // If more than 1 minute since last timestamp, market is presumably closed.
                         if (minutes < 1 && value == null) {
                             value = "-";
                         }
                     }
 
-                    // Add to array of pairs.
                     pairArr[i] = new Pair(key, value);
                     i++;
                 }
@@ -76,7 +71,6 @@ public class JSONParser {
     public static String[] getValueArray(String jsonStr, String key) {
         JSONArray jsonArr = null;
         JSONObject jsonObj = null;
-        // Test to see if the input is a valid JSON array or object and turn it into one of them.
         try {
             jsonObj = new JSONObject(jsonStr);
         } catch (JSONException eObj) {
@@ -88,7 +82,6 @@ public class JSONParser {
                 eArr.printStackTrace();
             }
         }
-        // Use the method corresponding to whether the input was a JSON array or object.
         if (jsonArr == null) {
             if (jsonObj == null) {
                 return new String[]{};
@@ -138,11 +131,7 @@ public class JSONParser {
         return value;
     }
 
-    /**
-     * Creates a connection to an HTTP website and retrieves JSON info.
-     * @param url The HTTP URL that the JSON info is stored on.
-     * @return Returns the JSON info as a String.
-     */
+
     public static String getJsonFromUrl(URL url) {
         HttpURLConnection connection = null;
         BufferedReader reader = null;
@@ -176,9 +165,6 @@ public class JSONParser {
         return null;
     }
 
-    /**
-     * Retrieves the JSON object from an HTTP url.
-     */
     public static JSONObject getJsonObjectFromUrl(URL url) {
         String jsonStr = getJsonFromUrl(url);
         try {
